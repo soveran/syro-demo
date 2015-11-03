@@ -1,0 +1,74 @@
+body {
+  font-family: "Inconsolata", monospace;
+  color: #111;
+  background-color: #faffff;
+}
+
+header {
+  position: fixed;
+  top: 100px;
+  left: 50px;
+}
+
+header a {
+  font-size: 2em;
+  text-decoration: none;
+  color: #fff;
+  background-color: #111;
+  padding: 0.2em 0.4em;
+}
+
+section {
+  display: block;
+  margin-top: 100px;
+  margin-left: 220px;
+  width: 500px;
+}
+
+section h1 {
+  font-weight: normal;
+  font-size: 1.6em;
+  margin-bottom: 1em;
+}
+
+section h2 {
+  font-weight: normal;
+  font-size: 1.2em;
+  margin: 2em 0 1em 0;
+}
+
+section h2 a {
+  text-decoration: none;
+  color: #08109F;
+}
+
+section p {
+  line-height: 1.5em;
+  font-weight: 400;
+}
+
+section p a {
+  color: #c55;
+}
+
+input, button {
+  display: block;
+  margin: 2em 0;
+  font-size: 1em;
+}
+
+nav a {
+  color: #c55;
+}
+
+footer {
+  margin: 50px 0 50px 220px;
+  width: 500px;
+  border-top: 1px dotted black;
+  font-size: 80%;
+}
+
+footer a {
+  text-decoration: none;
+  color: #c00;
+}

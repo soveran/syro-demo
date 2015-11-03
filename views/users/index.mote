@@ -1,0 +1,7 @@
+<nav>
+  <a href="/logout">Logout</a>
+</nav>
+
+<h1>Hello World</h1>
+
+<p>You are logged in as {{ user.email }}</p>

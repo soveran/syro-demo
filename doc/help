@@ -1,0 +1,58 @@
+usage: mk [install|check|server|test|console|help]
+
+## Commands
+
+install:
+	Initialize your project. It creates the `.gs` directory,
+	where the dependencies will be installed, and also the
+	`.env` file, where environment variables will be defined.
+
+check:
+	Check if all the dependencies are installed.
+
+server:
+	Run the application on localhost, port 9393.
+
+test:
+	Run tests.
+
+console:
+	Start an interactive Ruby session with the application
+	available for direct access.
+
+help:
+	Display this help text.
+
+## Examples
+
+Initialize the project:
+
+	$ mk install
+
+Make sure Redis is running on port 6379, then run the tests:
+
+	$ mk test
+
+Interact with your application via IRB:
+
+	$ mk console
+
+Once in IRB, you have access to your application. This is an
+example of an interactive session:
+
+	>> Web.call("PATH_INFO" => "/", "REQUEST_METHOD" => "GET")
+	=> [200, {"Content-Length"=>"201", "Content-Type"=>"text/html"}, ...]
+
+	>> User.all.to_a
+	>> []
+
+Finally, you can start the server:
+
+	$ mk server
+
+You can visit `localhost:9393` to access your application. It will
+try to send emails using the configuration defined in `.env` under
+the `MALONE_URL` environment variable. While testing, you don't
+need to worry about the emails sent, but in development it is useful
+to see those messages. For that purpose, check
+[mt](https://github.com/soveran/mt).

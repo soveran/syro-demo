@@ -1,0 +1,8 @@
+<nav>
+  <a href="/login">Login</a>
+  <a href="/signup">Signup</a>
+</nav>
+
+<h1>Hello World</h1>
+
+<p>Sample content</p>

@@ -1,0 +1,22 @@
+<nav>
+  <a href="/login">Login</a>
+  <a href="/signup">Signup</a>
+</nav>
+
+<h1>Login</h1>
+
+% if app.session[:error]
+  <p>
+    {{ app.session.delete(:error) }}
+  </p>
+% end
+
+<form action="/reset" method="POST">
+  <input
+    type="text"
+    name="email"
+    placeholder="Enter your email"
+    value="{{ Hache.h(app.req[:email].to_s) }}">
+
+  <button type="submit">Recover</button>
+</form>

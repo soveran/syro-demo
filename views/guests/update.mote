@@ -1,0 +1,21 @@
+<nav>
+  <a href="/login">Login</a>
+  <a href="/signup">Signup</a>
+</nav>
+
+<h1>Update your password</h1>
+
+% if app.session[:error]
+  <p>
+    {{ app.session.delete(:error) }}
+  </p>
+% end
+
+<form action="{{ app.path.prev }}" method="POST">
+  <input
+    type="password"
+    name="password"
+    placeholder="Password">
+
+  <button type="submit">Update</button>
+</form>

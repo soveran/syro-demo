@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+# Copyright (c) 2012 Michel Martens
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+help = <<EOS
+GS(1)
+
+NAME
+      gs -- Gemset management
+
+SYNOPSIS
+      gs init
+      gs help
+      gs [command]
+
+DESCRIPTION
+      When called with no arguments, it starts a shell session and
+      configures the variables GEM_HOME, GEM_PATH and PATH to point
+      to the $PWD/.gs directory. In addition, it sets the GS_NAME
+      variable with the name of the current gemset (useful for PS1).
+
+      init
+          Creates the $PWD/.gs directory.
+
+      help
+          Displays this message.
+
+      [command]
+          An optional command that will be executed under gs shell
+          session and return to the caller session once finished.
+EOS
+
+case ARGV[0]
+when "init" then Dir.mkdir(".gs"); exec($0)
+when "help" then puts help
+else
+  if File.directory?(".gs")
+    pwd = Dir.pwd
+    env = ENV.to_hash
+    env["GS_NAME"]  = File.basename(pwd)
+    env["GEM_HOME"] = pwd + "/.gs"
+    env["GEM_PATH"] = pwd + "/.gs:#{`gem env path`.strip}"
+    env["PATH"]     = pwd + "/.gs/bin:#{ENV['PATH']}"
+
+    if ARGV.length > 0
+      exec env, *ARGV
+    else
+      exec env, ENV["SHELL"] || ENV["COMSPEC"]
+    end
+  else
+    puts "Directory .gs not found. Try `gs help`."
+    exit 1
+  end
+end
