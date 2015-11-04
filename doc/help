@@ -29,7 +29,7 @@ Initialize the project:
 
 	$ mk install
 
-Make sure Redis is running on port 6379, then run the tests:
+Make sure Redis is running on port 6380, then run the tests:
 
 	$ mk test
 

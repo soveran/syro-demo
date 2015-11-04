@@ -1,6 +1,6 @@
 prepare do
-  redis = Redic.new($env["REDIS_TEST_URL"])
-  redis.call("FLUSHDB")
+  Ohm.redis = Redic.new($env["REDIS_TEST_URL"])
+  Ohm.redis.call("FLUSHDB")
 end
 
 setup do
