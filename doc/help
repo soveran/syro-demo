@@ -46,7 +46,8 @@ example of an interactive session:
 	>> User.all.to_a
 	>> []
 
-Finally, you can start the server:
+Finally, you can start the server. Make sure Redis is running on
+port 6379, and run the following command:
 
 	$ mk server
 
