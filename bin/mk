@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -f .env ]; then
+	env `cat .env` \
+	make $*
+else
+	make $*
+fi

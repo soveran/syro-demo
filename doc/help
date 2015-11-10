@@ -20,6 +20,9 @@ console:
 	Start an interactive Ruby session with the application
 	available for direct access.
 
+smtp:
+    Start a fake SMTP server that displays every message received.
+
 help:
 	Display this help text.
 
@@ -32,6 +35,14 @@ Initialize the project:
 Make sure Redis is running on port 6380, then run the tests:
 
 	$ mk test
+
+The application in development mode requires Redis to be running
+on port 6379. You can change that value by editing the .env file.
+
+It also requires a valid SMTP server. If you want to run a fake
+local SMTP server, open a new terminal window and run:
+
+    $ mk smtp
 
 Interact with your application via IRB:
 
@@ -46,8 +57,7 @@ example of an interactive session:
 	>> User.all.to_a
 	>> []
 
-Finally, you can start the server. Make sure Redis is running on
-port 6379, and run the following command:
+Finally, you can start the server:
 
 	$ mk server
 
@@ -55,5 +65,4 @@ You can visit `localhost:9393` to access your application. It will
 try to send emails using the configuration defined in `.env` under
 the `MALONE_URL` environment variable. While testing, you don't
 need to worry about the emails sent, but in development it is useful
-to see those messages. For that purpose, check
-[mt](https://github.com/soveran/mt).
+to see those messages.

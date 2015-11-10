@@ -17,6 +17,9 @@ console:
 gems:
 	@$(GS) gem list
 
+smtp:
+	./bin/mt 2525
+
 check: .gs .env
 	@$(GS) $(DEP)
 

@@ -23,7 +23,8 @@ fi
 ```
 
 Once you have the `mk` command, run `mk` or `mk help` to setup the
-project.
+project. For your convenience, the `mk` command is installed inside
+`./bin`, so you can just run `./bin/mk` and it will work.
 
 Directory layout
 ----------------
