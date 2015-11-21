@@ -1,4 +1,4 @@
-usage: mk [install|check|server|test|console|help]
+usage: mk [install|check|gems|server|test|console|help]
 
 ## Commands
 
@@ -9,6 +9,9 @@ install:
 
 check:
 	Check if all the dependencies are installed.
+
+gems:
+    List installed gems.
 
 server:
 	Run the application on localhost, port 9393.
