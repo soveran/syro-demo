@@ -5,9 +5,9 @@
 
 <h1>Login</h1>
 
-% if app.session[:error]
+% if app.session[:alert]
   <p>
-    {{ app.session.delete(:error) }}
+    {{ app.session.delete(:alert) }}
   </p>
 % end
 

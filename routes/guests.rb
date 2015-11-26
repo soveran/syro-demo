@@ -19,7 +19,7 @@ Guests = Syro.new(Frontend) {
         res.redirect "/"
       }
 
-      session[:error] = "Invalid login"
+      session[:alert] = "Invalid login"
 
       render("views/guests/login.mote")
     }
@@ -38,13 +38,13 @@ Guests = Syro.new(Frontend) {
       on(@invite.valid?) {
         Gatekeeper.invite(@invite.email)
 
-        session[:error] = "Check your email"
+        session[:alert] = "Check your email"
 
         res.redirect "/login"
       }
 
       on(true) {
-        session[:error] = "Invalid signup"
+        session[:alert] = "Invalid signup"
 
         render("views/guests/signup.mote", invite: @invite)
       }
@@ -69,7 +69,7 @@ Guests = Syro.new(Frontend) {
 
               authenticate(@user)
 
-              session[:error] = "Password updated"
+              session[:alert] = "Password updated"
 
               res.redirect "/"
             }
@@ -81,7 +81,7 @@ Guests = Syro.new(Frontend) {
           }
 
           on(true) {
-            session[:error] = "Invalid password"
+            session[:alert] = "Invalid password"
 
             render("views/guests/update.mote")
           }
@@ -89,7 +89,7 @@ Guests = Syro.new(Frontend) {
       }
 
       on(true) {
-        session[:error] = "Invalid or expired URL"
+        session[:alert] = "Invalid or expired URL"
 
         res.redirect "/reset"
       }
@@ -107,13 +107,13 @@ Guests = Syro.new(Frontend) {
       on(@user != nil) {
         Gatekeeper.reset(@user)
 
-        session[:error] = "Check your email"
+        session[:alert] = "Check your email"
 
         res.redirect "/login"
       }
 
       on(true) {
-        session[:error] = "Invalid email"
+        session[:alert] = "Invalid email"
 
         render("views/guests/reset.mote")
       }
@@ -133,13 +133,13 @@ Guests = Syro.new(Frontend) {
 
             authenticate(@user)
 
-            session[:error] = "Password updated"
+            session[:alert] = "Password updated"
 
             res.redirect "/"
           }
 
           on(true) {
-            session[:error] = "Invalid password"
+            session[:alert] = "Invalid password"
 
             render("views/guests/update.mote")
           }
@@ -147,7 +147,7 @@ Guests = Syro.new(Frontend) {
       }
 
       on(true) {
-        session[:error] = "Invalid or expired URL"
+        session[:alert] = "Invalid or expired URL"
 
         res.redirect "/reset"
       }
