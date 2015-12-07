@@ -88,7 +88,7 @@ Guests = Syro.new(Frontend) {
         }
       }
 
-      on(true) {
+      default {
         session[:alert] = "Invalid or expired URL"
 
         res.redirect "/reset"
@@ -112,7 +112,7 @@ Guests = Syro.new(Frontend) {
         res.redirect "/login"
       }
 
-      on(true) {
+      default {
         session[:alert] = "Invalid email"
 
         render("views/guests/reset.mote")
@@ -138,7 +138,7 @@ Guests = Syro.new(Frontend) {
             res.redirect "/"
           }
 
-          on(true) {
+          default {
             session[:alert] = "Invalid password"
 
             render("views/guests/update.mote")
@@ -146,7 +146,7 @@ Guests = Syro.new(Frontend) {
         }
       }
 
-      on(true) {
+      default {
         session[:alert] = "Invalid or expired URL"
 
         res.redirect "/reset"
