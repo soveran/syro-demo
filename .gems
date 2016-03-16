@@ -5,8 +5,8 @@ shield -v 2.1.1
 cutest -v 1.2.2
 hache -v 1.1.0
 scrivener -v 1.0.0
-syro -v 2.0.0
 rack-test -v 0.6.3
 malone -v 1.2.0
 nobi -v 0.0.1
 tas -v 0.0.1
+syro -v 2.1.0
