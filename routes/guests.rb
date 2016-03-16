@@ -1,70 +1,70 @@
-Guests = Syro.new(Frontend) {
+Guests = Syro.new(Frontend) do
   page[:title] = "Welcome"
 
-  get {
+  get do
     render("views/guests/index.mote")
-  }
+  end
 
-  on("login") {
+  on "login" do
     page[:title] = "Login"
 
-    get {
+    get do
       render("views/guests/login.mote")
-    }
+    end
 
-    post {
-      on(login(User, req[:email], req[:password]) != nil) {
+    post do
+      on login(User, req[:email], req[:password]) != nil do
         remember
 
         res.redirect "/"
-      }
+      end
 
       session[:alert] = "Invalid login"
 
       render("views/guests/login.mote")
-    }
-  }
+    end
+  end
 
-  on("signup") {
+  on "signup" do
     @invite = Invite.new(req[:invite] || {})
 
     page[:title] = "Signup"
 
-    get {
+    get do
       render("views/guests/signup.mote", invite: @invite)
-    }
+    end
 
-    post {
-      on(@invite.valid?) {
+    post do
+      on @invite.valid? do
         Gatekeeper.invite(@invite.email)
 
         session[:alert] = "Check your email"
 
         res.redirect "/login"
-      }
+      end
 
-      on(true) {
+      default do
         session[:alert] = "Invalid signup"
 
         render("views/guests/signup.mote", invite: @invite)
-      }
-    }
-  }
+      end
+    end
+  end
 
-  on("activate") {
-    on(:token) {
+  on "activate" do
+    on :token do
       @invite = Invite[Gatekeeper.decode(inbox[:token])]
 
-      on(@invite.valid?) {
-        get {
+      on @invite.valid? do
+        get do
           render("views/guests/update.mote")
-        }
+        end
 
-        post {
-          on(req[:password] != nil) {
+        post do
+          on req[:password] != nil do
             @signup = Signup.new(email: @invite.email, password: req[:password])
 
-            on(@signup.valid?) {
+            on @signup.valid? do
               @user = User.create(@signup.attributes)
 
               authenticate(@user)
@@ -72,63 +72,63 @@ Guests = Syro.new(Frontend) {
               session[:alert] = "Password updated"
 
               res.redirect "/"
-            }
+            end
 
-            on(true) {
+            default do
               res.write "invalid"
               res.write @signup.errors
-            }
-          }
+            end
+          end
 
-          on(true) {
+          default do
             session[:alert] = "Invalid password"
 
             render("views/guests/update.mote")
-          }
-        }
-      }
+          end
+        end
+      end
 
-      default {
+      default do
         session[:alert] = "Invalid or expired URL"
 
         res.redirect "/reset"
-      }
-    }
-  }
+      end
+    end
+  end
 
-  on("reset") {
-    get {
+  on "reset" do
+    get do
       render("views/guests/reset.mote")
-    }
+    end
 
-    post {
+    post do
       @user = User.fetch(req[:email])
 
-      on(@user != nil) {
+      on @user != nil do
         Gatekeeper.reset(@user)
 
         session[:alert] = "Check your email"
 
         res.redirect "/login"
-      }
+      end
 
-      default {
+      default do
         session[:alert] = "Invalid email"
 
         render("views/guests/reset.mote")
-      }
-    }
+      end
+    end
 
-    on(:token) {
+    on :token do
       @user = User[Gatekeeper.decode(inbox[:token])]
 
-      on(@user != nil) {
-        get {
+      on @user != nil do
+        get do
           render("views/guests/update.mote")
-        }
+        end
 
-        post {
-          on(req[:password] != nil) {
+        post do
+          on req[:password] != nil do
             @user.update(password: req[:password])
 
             authenticate(@user)
@@ -136,21 +136,21 @@ Guests = Syro.new(Frontend) {
             session[:alert] = "Password updated"
 
             res.redirect "/"
-          }
+          end
 
-          default {
+          default do
             session[:alert] = "Invalid password"
 
             render("views/guests/update.mote")
-          }
-        }
-      }
+          end
+        end
+      end
 
-      default {
+      default do
         session[:alert] = "Invalid or expired URL"
 
         res.redirect "/reset"
-      }
-    }
-  }
-}
+      end
+    end
+  end
+end

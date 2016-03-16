@@ -23,7 +23,7 @@ Ohm.redis = Redic.new($env["REDIS_URL"])
 # Main Syro application. It uses the `Frontend` deck, and you can
 # find it in `./decks/frontend.rb`. Refer to the Syro tutorial for
 # more information about Decks and other customizations.
-Web = Syro.new(Frontend) {
+Web = Syro.new(Frontend) do
 
   # The authenticated helper is included by Shield, and in this case
   # it returns an instance of User (if one is authenticated), or nil
@@ -33,13 +33,13 @@ Web = Syro.new(Frontend) {
   authenticated(User) ?
     run(Users) :
     run(Guests)
-}
+end
 
 # Rack application
-App = Rack::Builder.new {
+App = Rack::Builder.new do
   use Rack::MethodOverride
   use Rack::Session::Cookie, secret: $env["RACK_SESSION_SECRET"]
   use Rack::Static, urls: %w[/css /fonts /img], root: "./public"
 
   run(Web)
-}
+end
