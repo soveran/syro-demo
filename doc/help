@@ -11,7 +11,7 @@ check:
 	Check if all the dependencies are installed.
 
 gems:
-    List installed gems.
+	List installed gems.
 
 server:
 	Run the application on localhost, port 9393.
@@ -24,7 +24,7 @@ console:
 	available for direct access.
 
 smtp:
-    Start a fake SMTP server that displays every message received.
+	Start a fake SMTP server that displays every message received.
 
 help:
 	Display this help text.
@@ -45,7 +45,7 @@ on port 6379. You can change that value by editing the .env file.
 It also requires a valid SMTP server. If you want to run a fake
 local SMTP server, open a new terminal window and run:
 
-    $ mk smtp
+	 mk smtp
 
 Interact with your application via IRB:
 
