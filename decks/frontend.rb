@@ -24,6 +24,6 @@ class Frontend < Syro::Deck
     page[:content][:src] = path
     page[:content].update(params)
 
-    res.write(page)
+    res.html(page)
   end
 end
