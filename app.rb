@@ -8,6 +8,9 @@ require "nobi"
 require "malone"
 require "tas"
 
+# Workaround a bug in Rack 2.2.2
+require "delegate"
+
 # Path to project components
 GLOB = "./{lib,decks,routes,models,filters,services}/*.rb"
 
